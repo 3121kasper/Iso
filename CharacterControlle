@@ -1,0 +1,54 @@
+	public Rigidbody2D rb;
+	public float speed = 10;
+
+	private Vector2 moveRight;
+	private Vector2 moveLeft;
+	private Vector2 moveUp;
+	private Vector2 moveDown;
+	private Vector3 theScale;
+  
+	// Use this for initialization
+	void Start () {
+		moveRight = new Vector2 (speed, 0);
+		moveLeft = new Vector2 (speed, 0);
+		moveUp = new Vector2 (0, speed);
+		moveDown = new Vector2 (0, speed);
+
+	  Vector3 theScale = transform.localScale;
+    
+		rb = GetComponent<Rigidbody2D> ();
+
+	
+	}
+
+	// Update is called once per frame
+	void FixedUpdate () {
+		if (Input.GetKey (KeyCode.RightArrow)) {
+			rb.MovePosition(rb.position += moveRight * Time.fixedDeltaTime);
+			transform.localScale = new Vector3 (-1, 1, 1);
+		} else if (Input.GetKey (KeyCode.LeftArrow)) {
+			rb.MovePosition(rb.position -= moveLeft * Time.fixedDeltaTime);
+			transform.localScale = new Vector3 (1, 1, 1);
+		}
+		if (Input.GetKey (KeyCode.UpArrow)) {
+			rb.MovePosition(rb.position += moveUp * Time.fixedDeltaTime);
+		}
+		if (Input.GetKey (KeyCode.DownArrow)) {
+			rb.MovePosition(rb.position -= moveDown * Time.fixedDeltaTime);
+		}
+	}
+
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			GetComponent<SpriteRenderer> ().sprite = spriteBack;
+		}
+		if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			GetComponent<SpriteRenderer> ().sprite = spriteFront;
+		}
+		if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			GetComponent<SpriteRenderer> ().sprite = spriteFront;
+		}
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+			GetComponent<SpriteRenderer> ().sprite = spriteFront;
+		}
+	}
